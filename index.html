@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YummyStuff's Siege</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <div id="app">
+    <section id="auth-screen" class="auth-wrap">
+      <div class="auth-card">
+        <div class="eyebrow">YUMMYSTUFF STUDIOS</div>
+        <h1>YUMMY<span>STUFF'S</span><br>SIEGE</h1>
+        <p class="muted">A browser-based tactical shooter.</p>
+        <div class="auth-tabs">
+          <button class="tab active" data-auth="login">LOG IN</button>
+          <button class="tab" data-auth="signup">CREATE ACCOUNT</button>
+        </div>
+        <form id="auth-form">
+          <label id="username-label">EMAIL<input id="auth-username" autocomplete="username" placeholder="you@example.com" required></label>
+          <label id="email-label" class="hidden">EMAIL<input id="auth-email" type="email" autocomplete="email" placeholder="you@example.com"></label>
+          <label>PASSWORD<input id="auth-password" type="password" autocomplete="current-password" minlength="6" placeholder="At least 6 characters" required></label>
+          <button class="primary full" type="submit" id="auth-submit">ENTER THE GAME</button>
+        </form>
+        <div id="auth-note" class="note">Connect Supabase to enable online accounts. Demo mode is available until then.</div>
+        <button id="demo-button" class="ghost full">CONTINUE IN LOCAL DEMO</button>
+      </div>
+    </section>
+
+    <section id="game-shell" class="hidden">
+      <header class="topbar">
+        <div class="brand">YUMMY<span>STUFF'S</span> SIEGE <small>v1.0</small></div>
+        <div class="top-actions">
+          <button class="icon-button" data-panel="settings" title="Settings">⚙ <span>Settings</span></button>
+          <button class="icon-button" data-panel="friends" title="Friends">♟ <span>Friends</span><b id="friend-count">0</b></button>
+          <button class="icon-button" data-panel="chat" title="Chat">▤ <span>Chat</span></button>
+          <div class="profile-chip"><div class="avatar" id="avatar">Y</div><div><strong id="nav-username">Guest</strong><small>LEVEL <span id="nav-level">1</span></small></div></div>
+        </div>
+      </header>
+
+      <main id="main-menu" class="main-grid">
+        <section class="hero-panel">
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <div class="eyebrow">TACTICAL TEAM COMBAT</div>
+            <h2>PLAN.<br>BREACH.<br><em>DOMINATE.</em></h2>
+            <p>Five operators. Two bomb sites. One team takes the objective.</p>
+            <div class="player-summary">
+              <div class="large-avatar" id="hero-avatar">Y</div>
+              <div><strong id="hero-username">Guest</strong><small>LEVEL <span id="hero-level">1</span> · RECRUIT</small></div>
+            </div>
+          </div>
+          <div class="hero-stamp">5V5<br><span>TACTICAL</span></div>
+        </section>
+        <section class="menu-stack">
+          <button class="menu-card game-card" id="open-game"><span class="menu-number">01</span><span><b>GAME</b><small>Public matchmaking or practice</small></span><i>→</i></button>
+          <button class="menu-card" id="open-locker"><span class="menu-number">02</span><span><b>LOCKER</b><small>Choose your attack and defense loadouts</small></span><i>→</i></button>
+          <button class="menu-card" id="open-shop"><span class="menu-number">03</span><span><b>SHOP</b><small>Spend your Siege Coins</small></span><i>→</i></button>
+          <div class="wallet"><span>YOUR BALANCE</span><strong>◈ <b id="coin-balance">0</b> SIEGE COINS</strong></div>
+        </section>
+      </main>
+
+      <section id="subpage" class="subpage hidden">
+        <div class="subpage-head"><button class="back-button" id="back-home">← BACK</button><div><div class="eyebrow" id="page-eyebrow">OPERATIONS</div><h2 id="page-title">GAME</h2></div></div>
+        <div id="page-content"></div>
+      </section>
+
+      <aside id="side-panel" class="side-panel hidden">
+        <div class="panel-head"><h3 id="panel-title">FRIENDS</h3><button id="close-panel">✕</button></div>
+        <div id="panel-content"></div>
+      </aside>
+      <div id="toast" class="toast hidden"></div>
+    </section>
+
+    <section id="match-screen" class="match-screen hidden">
+      <div class="match-top"><div><b>YUMMYSTUFF'S SIEGE</b><small id="match-mode-label">PRACTICE</small></div><div class="match-stats"><span id="match-health">100 HP</span><span id="match-ammo">30 / 90</span><span id="match-kills">KILLS 0</span></div><button id="leave-match" class="danger">LEAVE</button></div>
+      <canvas id="game-canvas" width="1200" height="760"></canvas>
+      <div class="match-bottom"><span>WASD MOVE</span><span>MOUSE AIM</span><span>CLICK FIRE</span><span>R RELOAD</span><span>1 / 2 WEAPONS</span><span>SPACE ABILITY</span><span>Q / E MELEE</span></div>
+      <div id="match-message" class="match-message">ELIMINATE HOSTILES</div>
+    </section>
+  </div>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
